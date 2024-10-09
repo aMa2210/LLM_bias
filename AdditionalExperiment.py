@@ -24,7 +24,7 @@ for model_name in model_list:
                             r"you do not know the answer please select one of the letters a/b/c/d randomly with equal " \
                             r"probability "
             message_content = f"{question} Choices: {choices}. "
-            print(message_content)
+            # print(message_content)
             chat_completion = client.chat.completions.create(
                 messages=[
                     {
@@ -40,7 +40,7 @@ for model_name in model_list:
                 # logprobs=True
             )
             match = re.search(r"\{'sol': '([a-z])'\}", chat_completion.choices[0].message.content)
-            # print(str(index) + chat_completion.choices[0].message.content)
+            print(str(index) + chat_completion.choices[0].message.content)
             if match:
                 answer = match.group(1)
                 df.at[index, 'answer_' + model_name + '_'+str(i)] = answer

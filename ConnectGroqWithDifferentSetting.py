@@ -11,52 +11,51 @@ client = Groq(
 temperatures = ['0','default']
 messages = ["Please respond with only the letter of the solution, in the format {'sol': 'solution'}' "
             '''
-            The following are multiple choice questions (with answers) about abstract algebra.
+The following are examples.
 
-            Question: Statement 1 | If aH is an element of a factor group, then |aH| divides |a|. Statement 2 | If H and K are subgroups of G then HK is a subgroup of G.
-            a. True, True
-            b. False, False
-            c. True, False
-            d. False, True
-            'sol': 'b'
-            
-            Question: Find all c in Z_3 such that Z_3[x]/(x^2 + c) is a field.
-            a. 0
-            b. 1
-            c. 2
-            d. 3
-            'sol': 'b'
-            
-            Question: Find the characteristic of the ring 2Z.
-            a. 0
-            b. 3
-            c. 12
-            d. 30
-            'sol': 'a'
-            
-            Question: Statement 1| Every function from a finite set onto itself must be one to one. Statement 2 | Every subgroup of an abelian group is abelian.
-            a. True, True
-            b. False, False
-            c. True, False
-            d. False, True
-            'sol': 'a'
-            
-            Question: Statement 1 | Every element of a group generates a cyclic subgroup of the group. Statement 2 | The symmetric group S_10 has 10 elements.
-            a. True, True
-            b. False, False
-            c. True, False
-            d. False, True
-            'sol': 'c'
+Question: Statement 1 | If aH is an element of a factor group, then |aH| divides |a|. Statement 2 | If H and K are subgroups of G then HK is a subgroup of G.
+a) True, True
+b) False, False
+c) True, False
+d) False, True
+Answer: 'sol': 'b'
+
+Question: Find all c in Z_3 such that Z_3[x]/(x^2 + c) is a field.
+a) 0
+b) 1
+c) 2
+d) 3
+Answer: 'sol': 'b'
+
+Question: Find the characteristic of the ring 2Z.
+a) 0
+b) 3
+c) 12
+d) 30
+Answer: 'sol': 'a'
+
+Question: Statement 1| Every function from a finite set onto itself must be one to one. Statement 2 | Every subgroup of an abelian group is abelian.
+a) True, True
+b) False, False
+c) True, False
+d) False, True
+Answer: 'sol': 'a'
+
+Question: Statement 1 | Every element of a group generates a cyclic subgroup of the group. Statement 2 | The symmetric group S_10 has 10 elements.
+a) True, True
+b) False, False
+c) True, False
+d) False, True
+Answer: 'sol': 'c'
                         ''',
             "Please respond and include in the end the letter of the solution, in the format {'sol': 'solution'}"]
-            # "Here is an example:'Question: Statement 1 | If aH is an element of a factor group, then |aH| divides |a|. Statement 2 | If H and K are subgroups of G then HK is a subgroup of G."
-            # "a) True, True b) False, False c) True, False d) False, True"
-            # " {'sol': 'b'}",
-            # "Please respond and include in the end the letter of the solution, in the format {'sol': 'solution'}"]
+
 print(messages[0])
 column_name = ['direct', 'afterReasoning']
 # model_name = 'llama3-groq-8b-8192-tool-use-preview'
 model_name = 'mixtral-8x7b-32768'
+# model_name = 'llama-3.1-70b-versatile'
+# model_name = 'gemma2-9b-it'
 for index_message, systemMessage in enumerate(messages):
     for temperature in temperatures:
         for index, row in df.iterrows():
