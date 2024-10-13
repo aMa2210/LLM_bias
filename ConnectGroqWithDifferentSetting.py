@@ -3,13 +3,13 @@ import pandas as pd
 from groq import Groq
 import re
 
-df = pd.read_csv('combination_correct_options.csv')
-# df = pd.read_csv('combination_invented_options.csv') #change the file name manually or add another loop, plz. And you also need to change the file name in line72
+# df = pd.read_csv('combination_correct_options.csv')
+df = pd.read_csv('combination_invented_options.csv') #change the file name manually or add another loop, plz. And you also need to change the file name in line72
 client = Groq(
     api_key=os.environ.get("GROQ_API_KEY"),
 )
 temperatures = ['0','default']
-messages = ["Please respond with only the letter of the solution, in the format {'sol': 'solution'}' "
+messages = ["Please respond with only the letter of the solution, in the format {'sol': 'solution'}"
             '''
 The following are examples.
 
@@ -67,7 +67,7 @@ for index_message, systemMessage in enumerate(messages):
             labeled_choices = [f"{letter}{choice.strip()}" for letter, choice in choices_with_letters]
             choices = " ".join(labeled_choices)
             message_content = f"{question} Choices: {choices}."
-            # print(message_content)
+            print(message_content)
             if temperature == '0':
                 chat_completion = client.chat.completions.create(
                     messages=[
