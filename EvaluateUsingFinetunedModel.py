@@ -5,17 +5,18 @@ from openai import OpenAI
 
 client = OpenAI()
 mapping = {'a': 0, 'b': 1, 'c': 2, 'd': 3}
-message_system = "Please respond with only the letter of the solution, in the format {'sol': 'solution'}. If you do not know the answer you should pick one option randomly"
+# message_system = "Please respond with only the letter of the solution, in the format {'sol': 'solution'}. If you do not know the answer you should pick one option randomly"
+message_system = "Please respond with only the letter of the solution, in the format {'sol': 'solution'}."
 # model_name = 'gpt-4o-mini-2024-07-18'
 ##### model_names = ['gpt-4o-mini-2024-07-18','ft:gpt-4o-mini-2024-07-18:ging-upm:tairan:AIwcOVxj'] #model fined tuned by 1056 data
 model_names = ['gpt-4o-mini-2024-07-18','ft:gpt-4o-mini-2024-07-18:ging-upm:tairan:AIu9SNHG'] #model fined tuned by 176 data
-# model_names = ['ft:gpt-4o-mini-2024-07-18:ging-upm:tairan:AIu9SNHG'] #model fined tuned by 176 data
+# model_names = ['ft:gpt-4o-mini-2024-07-18:ging-upm:tairan:AIwcOVxj'] #model fined tuned by 1056 data
 
 
 file_name = 'combination_correct_options'
 # file_name = 'combination_invented_options'
 data_name = 'csv/'+file_name+'.csv'
-result_name = 'result/'+file_name+'_result_temperature0.csv'
+result_name = 'result/'+file_name+'_result_temperature0_prompt_withoutRandomHint.csv'
 df = pd.read_csv(data_name)
 print(message_system)
 try:
