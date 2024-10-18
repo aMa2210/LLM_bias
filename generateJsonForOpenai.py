@@ -3,9 +3,9 @@ import json
 
 mapping = {0: 'a', 1: 'b', 2: 'c', 3: 'd'}
 output_json = []
-output_file = 'output_finetune_data.jsonl'
+output_file = 'output_finetune_data_176.jsonl'
 # df = pd.read_csv('100invented_options.csv')
-df = pd.read_csv('csv/FinetuneData_combination.csv')
+df = pd.read_csv('csv/FinetuneData_combination_176.csv')
 messages = "Please respond with only the letter of the solution, in the format {'sol': 'solution'}. If you do not know the answer you should pick one option randomly"
 print(messages)
 with open(output_file, 'w') as outfile:

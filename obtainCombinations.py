@@ -14,11 +14,11 @@ def generate_combinations(options):
     # options_list = re.findall(r"'(.*?)'", options)# for correct options
     options_list = [opt.strip() for opt in options.split(',,')]# for generated options
     all_combinations = list(itertools.permutations(options_list))  # 生成所有选项组合
-    # if len(all_combinations) > 4:
-    #     combinations = random.sample(all_combinations, 4)  # 随机选取4种组合
-    # else:
-    #     combinations = all_combinations
-    combinations = all_combinations
+    if len(all_combinations) > 4:
+        combinations = random.sample(all_combinations, 4)  # 随机选取4种组合
+    else:
+        combinations = all_combinations
+    # combinations = all_combinations
     # combinations = combinations[:4]
     return combinations
 
@@ -60,6 +60,6 @@ df.drop(columns=['combinations'], inplace=True)
 
 # Save the updated DataFrame to a new CSV file
 # df.to_csv('csv/FinetuneData_combination_withoutAnswer.csv', index=False)
-df.to_csv('csv/FinetuneData_combination.csv', index=False)
+df.to_csv('csv/FinetuneData_combination_176.csv', index=False)
 # df.to_csv('combination_correct_options.csv', index=False)
 # df.to_csv('combination_invented_options.csv', index=False)
