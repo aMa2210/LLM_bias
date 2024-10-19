@@ -1,6 +1,7 @@
 import pandas as pd
 
 df = pd.read_csv('result/combination_correct_options_result_temperature0.csv', encoding='ISO-8859-1')
+# df = pd.read_csv('result/combination_invented_options_result_temperature0.csv', encoding='ISO-8859-1')
 
 column1 = 'answer'
 column2 = 'answer_original_temperature:0'
@@ -44,3 +45,30 @@ print('correct probability of finetuned model: '+str(prob_ft))
 print('correct probability of finetunedby1056 model: '+str(prob_ftby1056))
 print('correct probability of ori_noHint model: '+str(prob_ori_noHint))
 print('correct probability of ft_noHint model: '+str(prob_ft_noHint))
+
+
+# Acc-H
+group_size = 24
+total_rows = len(equal_values_ori)
+num_groups = total_rows // group_size  # 计算完整的组数
+
+count_all_true_groups = 0
+
+for i in range(num_groups):
+    start_idx = i * group_size
+    end_idx = start_idx + group_size
+    group = equal_values_ori_noHint[start_idx:end_idx]
+    if group.all():
+        # print(i)
+        count_all_true_groups += 1
+print('acc-h num(ori): ', count_all_true_groups)
+
+count_all_true_groups = 0
+for i in range(num_groups):
+    start_idx = i * group_size
+    end_idx = start_idx + group_size
+    group = equal_values_ft_noHint[start_idx:end_idx]
+    if group.all():
+        # print(i)
+        count_all_true_groups += 1
+print('acc-h num(ft): ', count_all_true_groups)

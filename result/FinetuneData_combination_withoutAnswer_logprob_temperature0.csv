@@ -267,3 +267,4 @@ Statement 1 | Every integral domain has a field of quotients. Statement 2 | A po
 ,,,0.771180775,0.132158912,0.043580948,0.053079365,0.491400648,0.230170707,0.176901099,0.101527546
 ,,,,,,,,,,
 ,,,1,,,,1,,,
+,,,a_ori,b_ori,d_ori,c_ori,b_ft,d_ft,c_ft,a_ft
