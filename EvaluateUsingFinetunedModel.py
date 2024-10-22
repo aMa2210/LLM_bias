@@ -9,15 +9,17 @@ mapping = {'a': 0, 'b': 1, 'c': 2, 'd': 3}
 message_system = "Please respond with only the letter of the solution, in the format {'sol': 'solution'}."
 # model_names = ['gpt-4o-mini-2024-07-18']
 ##### model_names = ['gpt-4o-mini-2024-07-18','ft:gpt-4o-mini-2024-07-18:ging-upm:tairan:AIwcOVxj'] #model fined tuned by 1056 data
-model_names = ['gpt-4o-mini-2024-07-18','ft:gpt-4o-mini-2024-07-18:ging-upm:tairan:AIu9SNHG'] #model fined tuned by 176 data
+# model_names = ['gpt-4o-mini-2024-07-18','ft:gpt-4o-mini-2024-07-18:ging-upm:tairan:AIu9SNHG'] #model fined tuned by 176 data
+# model_names = ['gpt-4o-mini-2024-07-18','ft:gpt-4o-mini-2024-07-18:ging-upm:tairan-3kdata:AKgiQ1hk'] #model fined tuned by 3k data
+model_names = ['ft:gpt-4o-mini-2024-07-18:ging-upm:tairan-3kdata:AKgiQ1hk'] #model fined tuned by 3k data
 # model_names = ['ft:gpt-4o-mini-2024-07-18:ging-upm:tairan:AIwcOVxj'] #model fined tuned by 1056 data
 
 
-# file_name = 'combination_correct_options'
-file_name = 'combination_invented_options'
+file_name = 'combination_correct_options'
+# file_name = 'Dataset_3k_randomOptions'
 # file_name = 'combination_invented_options'
 data_name = 'csv/'+file_name+'.csv'
-result_name = 'result/'+file_name+'_result_temperature0.csv'
+result_name = 'result/'+file_name+'_result_temperature0_ftBy3kData_tmp.csv'
 df = pd.read_csv(data_name)
 print(message_system)
 try:
