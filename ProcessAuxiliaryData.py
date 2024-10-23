@@ -2,7 +2,7 @@ import pandas as pd
 import json
 import re
 
-csv_file_path = 'csv/test_dataset_6k.csv'  # 替换为你的CSV文件路径
+csv_file_path = 'csv/test_dataset_6k.csv'
 df = pd.read_csv(csv_file_path)
 
 
@@ -39,7 +39,6 @@ def clean_data_string(data_str):
     return answer, choices, question
 
 
-# 定义解析函数
 def parse_data(row):
     data_str = row['train']  # 读取 'train' 列的值
     answer, choices, question = clean_data_string(data_str)

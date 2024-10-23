@@ -1,51 +1,41 @@
 import pandas as pd
 import itertools
 import re
-import random
-
-random.seed(613)
 # Read the CSV file
-df = pd.read_csv('csv/FinetuneData.csv')
+df = pd.read_excel('csv/anatomy.xlsx')# college_biology anatomy
 # df = pd.read_csv('test_dataset.csv')
 # df = pd.read_csv('updated_file.csv')
 
 # Define a function to generate all possible combinations of answers for a given question
-def generate_combinations(options):
+def generate_combinations(options, correct_answer):
     # options_list = re.findall(r"'(.*?)'", options)# for correct options
     options_list = [opt.strip() for opt in options.split(',,')]# for generated options
-    all_combinations = list(itertools.permutations(options_list))  # 生成所有选项组合
-    if len(all_combinations) > 4:
-        combinations = random.sample(all_combinations, 4)  # 随机选取4种组合
-    else:
-        combinations = all_combinations
-    # combinations = all_combinations
-    # combinations = combinations[:4]
-    return combinations
+    correct_answer_indices = list(map(int, str(correct_answer).split(',')))
+    combinations = list(itertools.permutations(options_list))
+
+    answer_positions = []
+    for combo in combinations:
+        new_correct_answer = [combo.index(options_list[i]) for i in correct_answer_indices]
+        answer_positions.append(','.join(map(str, new_correct_answer)))
+    return combinations, answer_positions
 
 
 
 # Apply the function to each row in the DataFrame
 df['choices'] = df['choices'].apply(lambda x: x.strip('[]').replace("' ", "',"))
 df['choices'] = df['choices'].apply(lambda x: x.strip(','))
-df['combinations'] = df.apply(lambda row: generate_combinations(row['choices']), axis=1)
+df['combinations_and_answers'] = df.apply(lambda row: generate_combinations(row['choices'], row['answer']), axis=1)
 
+df['combinations'] = df['combinations_and_answers'].apply(lambda x: x[0])
+df['new_answer'] = df['combinations_and_answers'].apply(lambda x: x[1])
 
+df = df.explode(['combinations', 'new_answer'])
 
-df = df.explode('combinations')
-df = df.reset_index(drop=True)
-df_new = []
-for _, row in df.iterrows():
-    for i in range(4):
-        new_row = row.copy()
-        new_row['answer'] = i
-        df_new.append(new_row)
+df['answer'] = df['new_answer'].apply(lambda x: ','.join(map(str, x)))
 
-df = pd.DataFrame(df_new)
 df['choices'] = df['combinations'].apply(lambda x: '[{}]'.format(',, '.join(x)))
 
-# df_new.drop(columns=['combinations'], inplace=True)
-df.drop(columns=['combinations'], inplace=True)
-# df.drop(columns=['answer'], inplace=True)
+df.drop(columns=['combinations_and_answers', 'new_answer', 'combinations'], inplace=True)
 #
 #
 # df['choices'] = df['combinations_and_answers'].apply(lambda x: x[0])
@@ -59,7 +49,5 @@ df.drop(columns=['combinations'], inplace=True)
 # df['choices'] = df['choices'].apply(lambda x: '[{}]'.format(',, '.join(x)))
 
 # Save the updated DataFrame to a new CSV file
-# df.to_csv('csv/FinetuneData_combination_withoutAnswer.csv', index=False)
-df.to_csv('csv/FinetuneData_combination_176.csv', index=False)
-# df.to_csv('combination_correct_options.csv', index=False)
+df.to_csv('csv/anatomy_combinations.csv', index=False)# college_biology
 # df.to_csv('combination_invented_options.csv', index=False)

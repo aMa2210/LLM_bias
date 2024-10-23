@@ -11,15 +11,15 @@ message_system = "Please respond with only the letter of the solution, in the fo
 ##### model_names = ['gpt-4o-mini-2024-07-18','ft:gpt-4o-mini-2024-07-18:ging-upm:tairan:AIwcOVxj'] #model fined tuned by 1056 data
 # model_names = ['gpt-4o-mini-2024-07-18','ft:gpt-4o-mini-2024-07-18:ging-upm:tairan:AIu9SNHG'] #model fined tuned by 176 data
 # model_names = ['gpt-4o-mini-2024-07-18','ft:gpt-4o-mini-2024-07-18:ging-upm:tairan-3kdata:AKgiQ1hk'] #model fined tuned by 3k data
-model_names = ['ft:gpt-4o-mini-2024-07-18:ging-upm:tairan-3kdata:AKgiQ1hk'] #model fined tuned by 3k data
+# model_names = ['ft:gpt-4o-mini-2024-07-18:ging-upm:tairan-3kdata:AKgiQ1hk'] #model fined tuned by 3k data
 # model_names = ['ft:gpt-4o-mini-2024-07-18:ging-upm:tairan:AIwcOVxj'] #model fined tuned by 1056 data
+model_names = ['gpt-4o-mini-2024-07-18','ft:gpt-4o-mini-2024-07-18:ging-upm:tairan:AIu9SNHG','ft:gpt-4o-mini-2024-07-18:ging-upm:tairan-3kdata:AKgiQ1hk'] #ori ftBy176 ftBy3k
 
-
-file_name = 'combination_correct_options'
+file_name = 'college_biology_combinations'
 # file_name = 'Dataset_3k_randomOptions'
 # file_name = 'combination_invented_options'
 data_name = 'csv/'+file_name+'.csv'
-result_name = 'result/'+file_name+'_result_temperature0_ftBy3kData_tmp.csv'
+result_name = 'result/'+file_name+'_result_temperature0.csv'
 df = pd.read_csv(data_name)
 print(message_system)
 try:
@@ -50,8 +50,10 @@ try:
                     answer = mapping[answer]
                     if model_name == 'gpt-4o-mini-2024-07-18':
                         df.at[index, 'answer_original_temperature:0'] = answer
-                    else:
-                        df.at[index, 'answer_fine-tuned_temperature:0'] = answer
+                    elif model_name == 'ft:gpt-4o-mini-2024-07-18:ging-upm:tairan:AIu9SNHG':
+                        df.at[index, 'answer_fine-tuned_temperature:0_ftby176'] = answer
+                    elif model_name == 'ft:gpt-4o-mini-2024-07-18:ging-upm:tairan-3kdata:AKgiQ1hk':
+                        df.at[index, 'answer_fine-tuned_temperature:0_ftby3k'] = answer
                     # else:
                     #     raise ValueError('wrong model name')
 
@@ -61,8 +63,10 @@ try:
                     print(answer)
                     if model_name == 'gpt-4o-mini-2024-07-18':
                         df.at[index, 'answer_original_temperature:0'] = answer
-                    else:
-                        df.at[index, 'answer_fine-tuned_temperature:0'] = answer
+                    elif model_name == 'ft:gpt-4o-mini-2024-07-18:ging-upm:tairan:AIu9SNHG':
+                        df.at[index, 'answer_fine-tuned_temperature:0_ftby176'] = answer
+                    elif model_name == 'ft:gpt-4o-mini-2024-07-18:ging-upm:tairan-3kdata:AKgiQ1hk':
+                        df.at[index, 'answer_fine-tuned_temperature:0_ftby3k'] = answer
             except Exception as row_e:
                 print(f"Error processing index {index} with model {model_name}: {row_e}")
                 # 可选：在DataFrame中记录错误信息
