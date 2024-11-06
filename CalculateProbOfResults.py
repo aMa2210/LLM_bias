@@ -1,6 +1,6 @@
 import pandas as pd
 
-# 读取CSV文件
+
 # df = pd.read_csv('result/FinetuneData_combination_withoutAnswer_result.csv')
 # df = pd.read_csv('result/combination_correct_options_result_temperature0.csv')
 # df = pd.read_csv('result/combination_correct_options_result_temperature0.csv', encoding='ISO-8859-1')

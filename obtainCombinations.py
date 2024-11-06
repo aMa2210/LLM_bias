@@ -5,7 +5,8 @@ import random
 
 random.seed(613)
 # Read the CSV file
-df = pd.read_csv('csv/FinetuneData.csv')
+df = pd.read_excel('csv/MMLU_spanish_randomOptions.xlsx')
+# df = pd.read_csv('csv/FinetuneData.csv')
 # df = pd.read_csv('test_dataset.csv')
 # df = pd.read_csv('updated_file.csv')
 
@@ -14,11 +15,11 @@ def generate_combinations(options):
     # options_list = re.findall(r"'(.*?)'", options)# for correct options
     options_list = [opt.strip() for opt in options.split(',,')]# for generated options
     all_combinations = list(itertools.permutations(options_list))  # 生成所有选项组合
-    if len(all_combinations) > 4:
-        combinations = random.sample(all_combinations, 4)  # 随机选取4种组合
-    else:
-        combinations = all_combinations
-    # combinations = all_combinations
+    # if len(all_combinations) > 4:
+    #     combinations = random.sample(all_combinations, 4)  # 随机选取4种组合
+    # else:
+    #     combinations = all_combinations
+    combinations = all_combinations
     # combinations = combinations[:4]
     return combinations
 
@@ -33,14 +34,14 @@ df['combinations'] = df.apply(lambda row: generate_combinations(row['choices']),
 
 df = df.explode('combinations')
 df = df.reset_index(drop=True)
-df_new = []
-for _, row in df.iterrows():
-    for i in range(4):
-        new_row = row.copy()
-        new_row['answer'] = i
-        df_new.append(new_row)
+# df_new = []
+# for _, row in df.iterrows():
+#     for i in range(4):
+#         new_row = row.copy()
+#         new_row['answer'] = i
+#         df_new.append(new_row)
 
-df = pd.DataFrame(df_new)
+# df = pd.DataFrame(df_new)
 df['choices'] = df['combinations'].apply(lambda x: '[{}]'.format(',, '.join(x)))
 
 # df_new.drop(columns=['combinations'], inplace=True)
@@ -60,6 +61,6 @@ df.drop(columns=['combinations'], inplace=True)
 
 # Save the updated DataFrame to a new CSV file
 # df.to_csv('csv/FinetuneData_combination_withoutAnswer.csv', index=False)
-df.to_csv('csv/FinetuneData_combination_176.csv', index=False)
+df.to_excel('csv/MMLU_spanish_randomOptions_combinations.xlsx', index=False)
 # df.to_csv('combination_correct_options.csv', index=False)
 # df.to_csv('combination_invented_options.csv', index=False)

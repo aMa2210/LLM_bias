@@ -31,7 +31,7 @@ for job in fine_tuning_jobs:
 # client.fine_tuning.jobs.retrieve("ftjob-abc123")
 #
 # # Cancel a job
-# client.fine_tuning.jobs.cancel("ftjob-abc123")
+# client.fine_tuning.jobs.cancel("ftjob-qg4gqIPRnwcNhSzvDFgFeiNx")
 #
 # # List up to 10 events from a fine-tuning job
 # client.fine_tuning.jobs.list_events(fine_tuning_job_id="ftjob-abc123", limit=10)

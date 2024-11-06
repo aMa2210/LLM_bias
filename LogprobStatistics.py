@@ -10,7 +10,8 @@ message_system = "Please respond with only the letter of the solution, in the fo
 # message_system = "Please respond with only the letter of the solution, in the format {'sol': 'solution'}."
 # model_name = 'gpt-4o-mini-2024-07-18'
 ##### model_names = ['gpt-4o-mini-2024-07-18','ft:gpt-4o-mini-2024-07-18:ging-upm:tairan:AIwcOVxj'] #model fined tuned by 1056 data
-model_names = ['gpt-4o-mini-2024-07-18','ft:gpt-4o-mini-2024-07-18:ging-upm:tairan:AIu9SNHG'] #model fined tuned by 176 data
+# model_names = ['gpt-4o-mini-2024-07-18','ft:gpt-4o-mini-2024-07-18:ging-upm:tairan:AIu9SNHG'] #model fined tuned by 176 data
+model_names = ['ft:gpt-4o-mini-2024-07-18:ging-upm:tairan-176data:AQSJvx45'] #ft by 176 with (n_epochs=3, batch_size=3, learning_rate_multiplier=0.05)
 # model_names = ['ft:gpt-4o-mini-2024-07-18:ging-upm:tairan:AIu9SNHG'] #model fined tuned by 176 data
 # model_names = ['ft:gpt-4o-mini-2024-07-18:ging-upm:tairan:AIwcOVxj'] #model fined tuned by 1056 data
 
@@ -19,7 +20,7 @@ file_name = 'FinetuneData_combination_withoutAnswer'
 # file_name = 'tmp'
 # file_name = 'combination_invented_options'
 data_name = 'csv/'+file_name+'.csv'
-result_name = 'result/'+file_name+'_logprob_temperature0.csv'
+result_name = 'result/'+file_name+'_logprob_otherParas.csv'
 df = pd.read_csv(data_name)
 print(message_system)
 assistant_content = "{'sol': '"
